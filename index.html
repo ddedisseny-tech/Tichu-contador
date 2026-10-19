@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tichu · Contador</title>
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#a63d2c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tichu">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf3de;--card:rgba(255,252,243,.96);--line:#d3b98a;--acc:#a63d2c;--onacc:#fff;--warn:#b3261e;--gold:#e3a72f;--ta:#b8432f;--tb:#2e7d8c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{font-synthesis:none}
+body{margin:0;min-height:100vh;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%20viewBox='0%200%20160%20160'%3E%3Cg%20fill='none'%20stroke='%23a63d2c'%20stroke-width='2.6'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.1'%3E%3Cg%20transform='translate(10%2014)'%3E%3Cpath%20d='M6%2038C16%2018%2026%2018%2034%2030S52%2044%2060%2028S72%2012%2080%2016'%20stroke-width='3.4'/%3E%3Cpath%20d='M6%2038C1%2036%201%2029%207%2028'/%3E%3Cpath%20d='M76%2013L84%204M72%2015L72%206'/%3E%3Cpath%20d='M93%2014C99%209%20102%2015%20107%2011M92%2019C98%2020%20101%2024%20105%2022'/%3E%3Cpath%20d='M21%2022L18%2031M18%2031l-3%201M18%2031l1%203M46%2038L49%2047M49%2047l3-1M49%2047l-1%203M62%2024L66%2031'/%3E%3Cpath%20d='M16%2021l1-5M26%2020l2-5M36%2031l4-3M52%2040l3%202M66%2016l2-4'%20stroke-width='2'/%3E%3Cpath%20d='M77%2011L91%209L97%2015L91%2018L97%2021L85%2022L77%2018Z'%20fill='%23a63d2c'%20stroke-width='1.2'/%3E%3C/g%3E%3Cg%20transform='translate(150%2092)%20scale(-1%201)'%3E%3Cpath%20d='M6%2038C16%2018%2026%2018%2034%2030S52%2044%2060%2028S72%2012%2080%2016'%20stroke-width='3.4'/%3E%3Cpath%20d='M6%2038C1%2036%201%2029%207%2028'/%3E%3Cpath%20d='M76%2013L84%204M72%2015L72%206'/%3E%3Cpath%20d='M93%2014C99%209%20102%2015%20107%2011M92%2019C98%2020%20101%2024%20105%2022'/%3E%3Cpath%20d='M21%2022L18%2031M18%2031l-3%201M18%2031l1%203M46%2038L49%2047M49%2047l3-1M49%2047l-1%203M62%2024L66%2031'/%3E%3Cpath%20d='M16%2021l1-5M26%2020l2-5M36%2031l4-3M52%2040l3%202M66%2016l2-4'%20stroke-width='2'/%3E%3Cpath%20d='M77%2011L91%209L97%2015L91%2018L97%2021L85%2022L77%2018Z'%20fill='%23a63d2c'%20stroke-width='1.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px repeat,linear-gradient(180deg,#ddd3ec 0,#efe7ef 200px,#fbf3de 460px) no-repeat,#fbf3de;color:#000;font:400 16px/1.4 "Zen Maru Gothic","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif}
+h1,h2{font-family:"Reggae One","Zen Maru Gothic","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
+.num{font-family:"Zen Maru Gothic","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;font-weight:700}
+main{max-width:1000px;margin:0 auto;padding:16px}
+button{font:inherit;color:#000;cursor:pointer;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;min-height:44px}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+button.pri{background:var(--acc);color:var(--onacc);border-color:var(--acc);font-weight:800}
+h1{font-size:clamp(46px,13vw,66px);letter-spacing:2px;line-height:1;margin:0;text-align:center;color:#f2bd45;-webkit-text-stroke:3px #7d3a24;paint-order:stroke fill;text-shadow:0 4px 0 rgba(125,58,36,.35)}
+.ic{font-size:1.45em;line-height:1;vertical-align:-.14em;margin-right:.16em}
+header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;margin-bottom:12px}
+.sub{display:inline-block;font-size:20px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:5px 16px;box-shadow:0 2px 6px rgba(80,30,0,.25)}
+.tools{display:flex;gap:8px;justify-content:space-between;width:100%}
+.tools button{background:#fff;border:2px solid #b08a4a;font-weight:700;box-shadow:0 2px 6px rgba(80,30,0,.2);padding:8px 10px;white-space:nowrap;min-width:0}
+.tools button .ic{font-size:1.2em}
+.paper{background-color:#efe6d3;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='g'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.75'%20numOctaves='3'%20seed='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200.55%20-0.2'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");border:2px solid var(--acc);border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 4px 14px rgba(80,30,0,.18)}
+.st{display:block;font-size:16px;font-weight:800;margin:10px 0 6px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.p{box-shadow:0 3px 10px rgba(80,30,0,.15);background:var(--card);border:1px solid var(--line);border-top:8px solid var(--pc);border-radius:14px;padding:12px}
+.p.lead{box-shadow:0 0 0 3px var(--gold)}
+.name{font-weight:700;font-size:19px;background:transparent;border:0;border-bottom:1px dashed var(--line);color:#000;width:100%;padding:2px 0;font-family:inherit}
+.mem{display:block;font-size:14px;margin-top:4px}
+.tag{display:inline-block;font-size:13px;font-weight:800;background:var(--gold);border-radius:99px;padding:2px 10px;margin-top:4px}
+.num{font-size:58px;line-height:1.05;margin:4px 0 2px}
+.num small{font-family:"Zen Maru Gothic","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;font-size:20px;font-weight:700}
+.num.over{color:var(--warn)}
+.bar{height:12px;background:#e6d6b4;border-radius:99px;overflow:hidden;margin:6px 0 0}
+.bar i{display:block;height:100%;border-radius:99px}
+.hist{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
+.hist div{padding:8px 0;border-bottom:1px solid var(--line)}
+.hist div:last-child{border:0}
+.hist small{display:block;font-size:13px}
+.pos{color:#1b6b2a;font-weight:800}.neg{color:var(--warn);font-weight:800}
+section{margin-top:20px}
+h2{font-size:22px;margin:0 0 8px;color:var(--acc)}
+.rank{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
+.rank div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+.rank div:last-child{border:0}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.setup{max-width:520px;margin:0 auto}
+.setup label{display:block;margin:12px 0 4px;font-weight:700}
+.seg{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}
+.seg button.on,.firsts button.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800}
+input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff8e6;color:#000;width:100%}
+.tagline{font-size:23px;font-weight:800;color:var(--acc);margin:8px 0 4px;text-align:center;line-height:1.2}
+.hint{font-size:14px}
+.legal{max-width:1000px;margin:8px auto 0;padding:14px 16px 28px;border-top:1px solid var(--line);font-size:12px;line-height:1.45;text-align:center}
+.legal p{margin:0 0 4px}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:9}
+#modal.show{display:flex}
+#box{background:#fff;width:100%;max-width:520px;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));max-height:85%;overflow:auto}
+#opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:10px}
+#opts button{background:#f0d9a0;border:2px solid #b08a4a;font-weight:800;box-shadow:0 2px 6px rgba(80,30,0,.25)}
+#mc{background:#fff;border:1px solid #c9bfa8;color:#333}
+.fin{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;display:flex;align-items:center;justify-content:center;padding:12px;overflow:auto}
+.fcard{background:linear-gradient(165deg,#fff9ea,#f1dcaa);border:4px solid var(--acc);border-radius:24px;max-width:460px;width:100%;padding:18px 16px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.4);animation:pop .45s cubic-bezier(.2,1.4,.4,1);max-height:96vh;overflow:auto}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.tro{font-size:56px;line-height:1}.tro .ic{font-size:1em;margin:0}
+.ft{font-size:34px;margin:6px 0 2px;letter-spacing:1px}
+.fw{font-size:23px;margin:4px 0 0}.fw b{color:var(--acc)}
+.fcard .rank{text-align:left;margin:14px 0 10px}
+.fcard .row{display:flex;gap:6px;flex-wrap:wrap}.fcard .row button{flex:1 1 auto;background:#fff;border:2px solid #b08a4a;font-weight:700}
+.fcard .row button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:800}
+.form{text-align:left}.form .ft{text-align:center;color:var(--acc)}
+.form label{display:block;font-weight:700;margin:8px 0 4px}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0}
+.crow span{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.crow button{min-width:110px;font-weight:700}
+.crow button.c1{background:#f0d9a0;border:2px solid #b08a4a}
+.crow button.c2{background:var(--acc);color:#fff;border-color:var(--acc)}
+.firsts{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+.prev{background:#fff8e6;border:1px dashed #b08a4a;border-radius:12px;padding:8px 10px;margin:12px 0 6px;font-weight:700;text-align:center}
+.err{color:var(--warn);font-weight:700;min-height:1.3em;margin:4px 0;text-align:center}
+@media(prefers-reduced-motion:reduce){.fcard{animation:none}}
+</style></head>
+<body><main id="app"></main>
+<div id="modal"><div id="box" role="dialog" aria-modal="true"><h2 id="mt"></h2><div id="opts"></div><button id="mc" style="width:100%">Cancelar</button></div></div>
+<footer class="legal"><p><b>Tichu</b> es un juego de sus respectivos autores, editado en español por <b>Devir</b>. Este contador gratuito ha sido diseñado y creado por <b>PenTech</b> como complemento para facilitar la contabilidad de la partida.</p><p>El nombre del juego y sus reglas pertenecen a sus titulares.</p></footer>
+<script>
+const KEY="tichu-v1",COLS=["#b8432f","#2e7d8c"],PC=["#b8432f","#2e7d8c","#6f9a4a","#e3a72f"];
+const BRAND='<h1>Tichu</h1>';
+let S=null,H=[],F=null;
+try{const r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);const q=localStorage.getItem(KEY+"-h");if(q){const a=JSON.parse(q);if(Array.isArray(a))H=a}}}catch(e){}
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const sg=n=>(n>0?"+":"")+n;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));localStorage.setItem(KEY+"-h",JSON.stringify(H))}catch(e){}}
+function mut(fn){H.push(JSON.stringify(S));if(H.length>80)H.shift();fn();save();render()}
+function undo(){if(!H.length)return;S=JSON.parse(H.pop());save();render()}
+function big(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);
+  const E=/(\p{Extended_Pictographic}\uFE0F?)/u;
+  ns.forEach(n=>{const t=n.nodeValue;if(!E.test(t))return;const f=document.createDocumentFragment();
+    t.split(E).forEach(p=>{if(p&&/^\p{Extended_Pictographic}/u.test(p)){const s=document.createElement("span");s.className="ic";s.textContent=p;f.appendChild(s)}else if(p)f.appendChild(document.createTextNode(p))});
+    n.parentNode.replaceChild(f,n)})}
+function pick(title,opts){return new Promise(res=>{
+  $("#mt").textContent=title;const o=$("#opts");o.innerHTML="";
+  opts.forEach(x=>{const b=document.createElement("button");b.textContent=x.l;b.onclick=()=>{$("#modal").classList.remove("show");res(x.v)};o.appendChild(b)});
+  big(o);$("#mc").onclick=()=>{$("#modal").classList.remove("show");res(null)};$("#modal").classList.add("show");o.firstChild&&o.firstChild.focus()})}
+/* ---------- lógica de puntuación ---------- */
+const dealer=()=>S.hist.length%3;
+const callers=()=>S.mode==="3"?[...S.names,"La Mesa"]:S.names;
+const ents=()=>S.mode==="3"?[...S.names,"La Mesa"]:S.tn;
+const teamOf=i=>S.mode==="3"?((i===dealer()||i===3)?0:1):i%2;
+function tlabel(t){if(S.mode==="3"){const d=dealer();return t===0?S.names[d]+" y La Mesa":S.names.filter((_,i)=>i!==d).join(" y ")}return S.tn[t]}
+function totals(){const n=ents().length,t=Array(n).fill(0);S.hist.forEach(h=>h.d.forEach((v,i)=>t[i]+=v));return t}
+function calc(f){
+  const m=S.mode,T=[0,0],tags=[],cn=callers();
+  if(f.kind==="n"){T[0]=f.x;T[1]=100-f.x}else T[f.kind==="a"?0:1]=m==="6"?300:200;
+  f.calls.forEach((c,i)=>{if(!c)return;const ok=f.first===i,v=(c==2?200:100)*(ok?1:-1);T[teamOf(i)]+=v;tags.push((c==2?"Gran Tichu":"Tichu")+" de "+cn[i]+(ok?" ✔":" ✘"))});
+  if(f.kind!=="n")tags.unshift((m==="6"?"Triple":"Doble")+" victoria de "+tlabel(f.kind==="a"?0:1));
+  const d=m==="3"?[0,1,2,3].map(i=>T[teamOf(i)]):T;
+  return{d,tags}}
+/* ---------- pantallas ---------- */
+function setup(){
+  const m=window._m||"4",N={"4":4,"3":3,"6":6}[m],tg=window._t||1000,nr=window._r||6;
+  const modes=[["4","👥 4 jugadores"],["3","🀄 Trichu · 3"],["6","🏮 Tianjin · 6"]];
+  $("#app").innerHTML=`<div class="setup">${BRAND}<p class="hint tagline">¿Quién se queda sin cartas primero?</p>
+  <label>Modo de juego</label><div class="seg">${modes.map(([k,l])=>`<button data-m="${k}" class="${k==m?"on":""}">${l}</button>`).join("")}</div>
+  <p class="hint">${m==="4"?"Dos equipos de 2. Los jugadores se sientan alternados: J1 y J3 contra J2 y J4.":m==="3"?"Trichu (Tichu de Nankín): cada jugador puntúa por su cuenta. El que reparte juega con un compañero virtual, «la Mesa».":"Tichu de Tianjin: dos equipos de 3, sentados alternados: J1, J3 y J5 contra J2, J4 y J6. La triple victoria vale 300."}</p>
+  ${m==="3"?`<label>Número de rondas</label><div class="seg">${[3,6,9,12].map(k=>`<button data-r="${k}" class="${k==nr?"on":""}">${k}</button>`).join("")}</div><p class="hint">Tiene que ser múltiplo de 3 para que todos jueguen igual de veces con la Mesa.</p>`
+  :`<label>Puntos para ganar</label><div class="seg">${[500,750,1000].map(k=>`<button data-t="${k}" class="${k==tg?"on":""}">${k}</button>`).join("")}</div>
+  <label>Nombre del Equipo A</label><input type="text" id="ta" placeholder="Equipo A"><label>Nombre del Equipo B</label><input type="text" id="tb" placeholder="Equipo B">`}
+  ${Array.from({length:N},(_,i)=>`<label>Jugador ${i+1}${m==="3"?"":" (Equipo "+(i%2?"B":"A")+")"}</label><input type="text" data-n placeholder="Jugador ${i+1}">`).join("")}
+  <p><button class="pri" id="go" style="width:100%">✅ Empezar partida</button></p></div>`;
+  big($("#app"));
+  document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{window._m=b.dataset.m;setup()});
+  document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{window._t=+b.dataset.t;setup()});
+  document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{window._r=+b.dataset.r;setup()});
+  $("#go").onclick=()=>{
+    const names=[...document.querySelectorAll("[data-n]")].map((e,i)=>e.value.trim()||"Jugador "+(i+1));
+    const tn=m==="3"?["",""]:[($("#ta").value.trim()||"Equipo A"),($("#tb").value.trim()||"Equipo B")];
+    S={mode:m,names,tn,target:tg,nr,hist:[],over:false,shown:false};H=[];save();render()}}
+function openForm(){
+  F={kind:"n",x:50,calls:Array(callers().length).fill(0),first:null};renderForm()}
+function renderForm(){
+  let d=$(".fin.form-o");if(!d){d=document.createElement("div");d.className="fin form-o";document.body.appendChild(d)}
+  const m=S.mode,cn=callers(),sp=m==="6"?"Triple victoria":"Doble victoria";
+  d.innerHTML=`<div class="fcard form" role="dialog" aria-modal="true"><h2 class="ft">Mano nº ${S.hist.length+1}</h2>
+  ${m==="3"?`<p style="text-align:center;margin:0">Reparte: <b>${esc(S.names[dealer()])}</b> (juega con la Mesa)</p>`:""}
+  <small class="st">🏁 Resultado de la mano</small>
+  <div class="seg" style="grid-template-columns:1fr"><button data-k="n" class="${F.kind==="n"?"on":""}" style="${F.kind==="n"?"background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800":""}">Reparto de puntos de cartas</button>
+  <button data-k="a" style="${F.kind==="a"?"background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800":""}">${sp}: ${esc(tlabel(0))}</button>
+  <button data-k="b" style="${F.kind==="b"?"background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800":""}">${sp}: ${esc(tlabel(1))}</button></div>
+  ${F.kind==="n"?`<label for="fx">Puntos de cartas de ${esc(tlabel(0))}</label><input type="number" id="fx" inputmode="numeric" step="5" min="-25" max="125" value="${F.x}">`:""}
+  <small class="st">📣 Tichu y Gran Tichu cantados</small>
+  ${cn.map((nm,i)=>`<div class="crow"><span>${esc(nm)}</span><button data-c="${i}" class="c${F.calls[i]}">${["Ninguno","Tichu","Gran Tichu"][F.calls[i]]}</button></div>`).join("")}
+  <small class="st">🥇 ¿Quién acabó primero?</small>
+  <div class="firsts">${cn.map((nm,i)=>`<button data-f="${i}" class="${F.first===i?"on":""}">${esc(nm)}</button>`).join("")}</div>
+  <div class="prev" id="prev"></div><p class="err" id="ferr" role="alert"></p>
+  <div class="row"><button id="fc">Cancelar</button><button class="pri" id="fok">✅ Apuntar mano</button></div></div>`;
+  big(d);
+  d.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{F.kind=b.dataset.k;renderForm()});
+  d.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{const i=+b.dataset.c,no2=(m==="3"&&(i===dealer()||i===3));F.calls[i]=no2?(F.calls[i]?0:1):(F.calls[i]+1)%3;renderForm()});
+  d.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{const i=+b.dataset.f;F.first=F.first===i?null:i;renderForm()});
+  const fx=d.querySelector("#fx");if(fx)fx.oninput=()=>{const v=parseInt(fx.value,10);F.x=isNaN(v)?0:v;prev()};
+  d.querySelector("#fc").onclick=()=>{d.remove();F=null};
+  d.querySelector("#fok").onclick=apply;prev()}
+function prev(){
+  const{d,tags}=calc(F),e=ents(),el=$("#prev");if(!el)return;
+  el.innerHTML="Esta mano: "+e.map((n,i)=>esc(n)+" <span class='"+(d[i]<0?"neg":"pos")+"'>"+sg(d[i])+"</span>").join(" · ")}
+function apply(){
+  const m=S.mode;
+  if(F.calls.some(c=>c)&&F.first===null){$("#ferr").textContent="Indica quién acabó primero para resolver los Tichus.";return}
+  if(F.kind==="n"&&(F.x<-25||F.x>125)){$("#ferr").textContent="Los puntos de cartas de un equipo van de −25 a 125.";return}
+  const{d,tags}=calc(F);
+  $(".fin.form-o").remove();F=null;
+  mut(()=>{S.hist.push({d,tags});const t=totals();
+    if(m==="3")S.over=S.hist.length>=S.nr;
+    else{const mx=Math.max(...t);if(mx>=S.target&&t[0]!==t[1])S.over=true}})}
+async function reset(){const r=await pick("¿Empezar una partida nueva? Se borra la actual.",[{l:"Sí, nueva partida",v:1}]);if(r){S=null;H=[];try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-h")}catch(e){}render()}}
+function confetti(){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  const c=document.createElement("canvas");c.style.cssText="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40";
+  document.body.appendChild(c);const dpr=window.devicePixelRatio||1,W=innerWidth,Hh=innerHeight;
+  c.width=W*dpr;c.height=Hh*dpr;const x=c.getContext("2d");x.scale(dpr,dpr);
+  const cols=["#b8432f","#2e7d8c","#6f9a4a","#e3a72f","#a63d2c","#d9cfea","#ffffff"],P=[];
+  const burst=(bx,by,n)=>{for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,v=5+Math.random()*11;
+    P.push({x:bx,y:by,vx:Math.cos(a)*v,vy:Math.sin(a)*v-7,w:6+Math.random()*8,h:4+Math.random()*6,r:Math.random()*6,vr:(Math.random()-.5)*.5,c:cols[i%cols.length]})}};
+  const rain=n=>{for(let i=0;i<n;i++)P.push({x:Math.random()*W,y:-10-Math.random()*60,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,w:6+Math.random()*7,h:4+Math.random()*6,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[i%cols.length]})};
+  burst(W/2,Hh*.35,90);
+  setTimeout(()=>{burst(W*.15,Hh*.5,60);burst(W*.85,Hh*.5,60)},300);
+  setTimeout(()=>burst(W/2,Hh*.3,80),800);
+  setTimeout(()=>rain(70),1200);
+  const t0=performance.now();
+  (function f(){x.clearRect(0,0,W,Hh);
+    for(let i=P.length-1;i>=0;i--){const p=P[i];p.vy+=.28;p.vx*=.992;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+      if(p.y>Hh+30){P.splice(i,1);continue}
+      x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore()}
+    if(P.length||performance.now()-t0<2500)requestAnimationFrame(f);else c.remove()})()}
+function showFin(){
+  if(!S||document.querySelector(".fin.fin-o"))return;
+  const e=ents(),t=totals(),rank=e.map((n,i)=>({n,i,v:t[i]})).sort((a,b)=>b.v-a.v),mx=rank[0].v;
+  const ws=rank.filter(r=>r.v==mx),win=ws.map(r=>esc(r.n)).join(" y ");
+  let miembros="";
+  if(S.mode!=="3"&&ws.length===1){const w=ws[0].i;miembros="<p style='margin:2px 0'>"+S.names.filter((_,i)=>i%2===w).map(esc).join(" · ")+"</p>"}
+  const d=document.createElement("div");d.className="fin fin-o";
+  d.innerHTML=`<div class="fcard" role="dialog" aria-modal="true"><div class="tro">🏆</div><h2 class="ft">¡Fin de partida!</h2>
+  <p class="fw">Gana <b>${win}</b></p>${miembros}<p>con ${mx} puntos</p>${ws.length>1?"<p>¡Empate!</p>":""}
+  <div class="rank">${rank.map((r,k)=>`<div><span><i class="dot" style="background:${S.mode==="3"?PC[r.i]:COLS[r.i]}"></i>${["🥇","🥈","🥉"][k]||(k+1)+"."} ${esc(r.n)}</span><b>${r.v}</b></div>`).join("")}</div>
+  <div class="row"><button id="fv">👀 Ver partida</button><button class="pri" id="fn">🆕 Nueva partida</button></div></div>`;
+  document.body.appendChild(d);big(d);
+  d.querySelector("#fv").onclick=()=>d.remove();
+  d.querySelector("#fn").onclick=()=>{d.remove();S=null;H=[];try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-h")}catch(e){}render()};
+  confetti()}
+function render(){
+  if(!S)return setup();
+  const m=S.mode,e=ents(),t=totals(),mx=Math.max(...t),n=S.hist.length;
+  const sub=m==="3"?`Mano ${Math.min(n+1,S.nr)} de ${S.nr}`:`Mano nº ${n+1}`;
+  const cards=e.map((nm,i)=>{
+    const col=m==="3"?PC[i]:COLS[i],lead=t[i]===mx&&mx>0,isMesa=m==="3"&&i===3;
+    const mem=m==="3"?(i===dealer()&&!S.over?'<span class="tag">Reparte</span>':isMesa?'<span class="tag">Compañera virtual</span>':""):`<span class="mem">${S.names.filter((_,k)=>k%2===i).map(esc).join(" · ")}</span>`;
+    const nameField=isMesa?`<div class="name" style="border:0">🀄 La Mesa</div>`:`<input class="name" data-e="${i}" value="${esc(nm)}" aria-label="Nombre">`;
+    const goal=m==="3"?"":`<small> / ${S.target}</small>`;
+    const pct=m==="3"?0:Math.max(0,Math.min(100,t[i]/S.target*100));
+    return `<div class="p ${lead?"lead":""}" style="--pc:${col}">${nameField}${mem}<div class="num ${m!=="3"&&t[i]>=S.target?"over":""}">${t[i]}${goal}</div>${m==="3"?"":`<div class="bar"><i style="width:${pct}%;background:${col}"></i></div>`}</div>`}).join("");
+  const hist=[...S.hist].map((h,k)=>({h,k})).reverse().map(({h,k})=>`<div><b>Mano ${k+1}:</b> ${e.map((nm,i)=>esc(nm)+" <span class='"+(h.d[i]<0?"neg":"pos")+"'>"+sg(h.d[i])+"</span>").join(" · ")}${h.tags.length?`<small>${h.tags.map(esc).join(" · ")}</small>`:""}</div>`).join("");
+  const rank=m==="3"?e.map((nm,i)=>({nm,i,v:t[i]})).sort((a,b)=>b.v-a.v):null;
+  $("#app").innerHTML=`<header>${BRAND}<div class="sub">${sub}</div>${m==="3"&&!S.over?`<div class="hint">Reparte <b>${esc(S.names[dealer()])}</b> · juega con la Mesa</div>`:""}
+  <div class="tools"><button id="u" ${H.length?"":"disabled"}>↩️ Deshacer</button><button id="rs">🆕 Nueva partida</button></div></header>
+  ${S.over?`<div class="paper"><b style="font-size:20px">🏁 Fin de partida</b><button class="pri" id="vr" style="width:100%;margin-top:8px">🏆 Ver resultados</button></div>`
+  :`<div class="paper"><button class="pri" id="ap" style="width:100%;font-size:19px">➕ Apuntar mano</button>${m!=="3"&&Math.max(...t)>=S.target&&t[0]===t[1]?`<p style="margin:8px 0 0;font-weight:700;color:var(--warn)">¡Empate a ${t[0]}! Se sigue jugando hasta desempatar.</p>`:""}</div>`}
+  <div class="grid">${cards}</div>
+  ${rank?`<section><h2>🏆 Clasificación</h2><div class="rank">${rank.map((r,k)=>`<div><span><i class="dot" style="background:${PC[r.i]}"></i>${["🥇","🥈","🥉"][k]||(k+1)+"."} ${esc(r.nm)}</span><b>${r.v}</b></div>`).join("")}</div></section>`:""}
+  <section><h2>📜 Historial</h2><div class="hist">${hist||"<div>Todavía no hay manos apuntadas.</div>"}</div></section>`;
+  big($("#app"));
+  $("#u").onclick=undo;$("#rs").onclick=reset;if($("#ap"))$("#ap").onclick=openForm;if($("#vr"))$("#vr").onclick=showFin;
+  document.querySelectorAll("input.name").forEach(el=>el.onchange=()=>{const i=+el.dataset.e,v=el.value.trim();
+    if(m==="3")S.names[i]=v||"Jugador "+(i+1);else S.tn[i]=v||"Equipo "+(i?"B":"A");save();render()});
+  if(S.over&&!S.shown){S.shown=true;save();setTimeout(showFin,200)}}
+render();
+if("serviceWorker" in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script></body></html>
