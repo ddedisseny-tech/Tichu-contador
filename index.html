@@ -15,10 +15,13 @@
 *{box-sizing:border-box}
 html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{font-synthesis:none}
-.mtitle{text-align:center;margin:6px 0 4px}
+.pr{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400;font-size:1.25em;line-height:1}
+.mtitle{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400;font-size:clamp(32px,9vw,38px);line-height:1.1;color:var(--acc);text-align:center;margin:6px 0 4px}
 .mopt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin:14px 0;box-shadow:0 3px 10px rgba(80,30,0,.15);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .mopt .hint{margin:10px 2px 0;text-align:center}
 .mbtn{width:100%;font-size:20px;padding:16px 12px}
+button.pri.mbtn{background:linear-gradient(180deg,#fcd9e2,#f5b9ca);color:#6e2236;border:2px solid #e590a9;box-shadow:0 2px 0 #d97f9a}
+button.pri.mbtn:active{transform:translateY(2px);box-shadow:none}
 .modehead{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:4px}.modehead h2{margin:0;align-self:center}
 #topbar{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:center;padding:env(safe-area-inset-top,0px) 0 6px;pointer-events:none;transition:background .25s,box-shadow .25s}
 #topbar img{display:block;width:min(72vw,300px);height:auto;transition:width .25s ease;filter:drop-shadow(0 2px 3px rgba(255,255,255,.7))}
@@ -78,7 +81,6 @@ h2{font-size:22px;margin:0 0 8px;color:var(--acc)}
 .seg{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}
 .seg button.on,.firsts button.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800}
 input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff8e6;color:#000;width:100%}
-.tagline{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-size:clamp(32px,9vw,38px);font-weight:400;color:var(--acc);margin:8px 0 4px;text-align:center;line-height:1.1}
 .hint{font-size:16px}
 .legal{max-width:1000px;margin:8px auto 0;padding:14px 16px 28px;border-top:1px solid var(--line);font-size:14px;line-height:1.45;text-align:center}
 .legal p{margin:0 0 4px}
@@ -147,12 +149,11 @@ function calc(f){
   const d=m==="3"?[0,1,2,3].map(i=>T[teamOf(i)]):T;
   return{d,tags}}
 /* ---------- pantallas ---------- */
-const MODES=[["4","👥 Tichu · 4 jugadores","Dos equipos de 2. Los jugadores se sientan alternados: J1 y J3 contra J2 y J4."],
-["3","🀄 Trichu · 3 jugadores","Trichu (Tichu de Nankín): cada jugador puntúa por su cuenta. El que reparte juega con un compañero virtual, «la Mesa»."],
-["6","🏮 Tianjin · 6 jugadores","Tichu de Tianjin: dos equipos de 3, sentados alternados: J1, J3 y J5 contra J2, J4 y J6. La triple victoria vale 300."]];
+const MODES=[["4","👥 <span class=\"pr\">Tichu</span> · 4 jugadores","Dos equipos de 2. Los jugadores se sientan alternados: J1 y J3 contra J2 y J4."],
+["3","🀄 <span class=\"pr\">Trichu</span> · 3 jugadores","Trichu (Tichu de Nankín): cada jugador puntúa por su cuenta. El que reparte juega con un compañero virtual, «la Mesa»."],
+["6","🏮 <span class=\"pr\">Tianjin</span> · 6 jugadores","Tichu de Tianjin: dos equipos de 3, sentados alternados: J1, J3 y J5 contra J2, J4 y J6. La triple victoria vale 300."]];
 function menu(){
-  $("#app").innerHTML=`<div class="setup"><p class="hint tagline">¿Quién se queda sin cartas primero?</p>
-  <h2 class="mtitle">Elige el modo de juego</h2>
+  $("#app").innerHTML=`<div class="setup">  <h2 class="mtitle">Elige el modo de juego</h2>
   ${MODES.map(([k,l,d])=>`<div class="mopt"><button class="pri mbtn" data-go="${k}">${l}</button><p class="hint">${d}</p></div>`).join("")}</div>`;
   big($("#app"));
   document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{window._m=b.dataset.go;setup();window.scrollTo(0,0)});
@@ -160,8 +161,7 @@ function menu(){
 function setup(){
   const m=window._m||"4",N={"4":4,"3":3,"6":6}[m],tg=window._t||1000,nr=window._r||6;
   const pf=i=>`<label>Jugador ${i+1}</label><input type="text" data-n="${i}" placeholder="Jugador ${i+1}">`;
-  $("#app").innerHTML=`<div class="setup">${BRAND}<p class="hint tagline">¿Quién se queda sin cartas primero?</p>
-  <div class="modehead"><button id="back">← Cambiar modo</button><h2>${MODES.find(x=>x[0]===m)[1]}</h2></div>
+  $("#app").innerHTML=`<div class="setup">${BRAND}  <div class="modehead"><button id="back">← Cambiar modo</button><h2>${MODES.find(x=>x[0]===m)[1]}</h2></div>
   ${m==="3"?`<label>Número de rondas</label><div class="seg">${[3,6,9,12].map(k=>`<button data-r="${k}" class="${k==nr?"on":""}">${k}</button>`).join("")}</div><p class="hint">Tiene que ser múltiplo de 3 para que todos jueguen igual de veces con la Mesa.</p>`
   :`<label>Puntos para ganar</label><div class="seg">${[500,750,1000].map(k=>`<button data-t="${k}" class="${k==tg?"on":""}">${k}</button>`).join("")}</div>`}
   ${m==="3"?Array.from({length:N},(_,i)=>pf(i)).join(""):[0,1].map(t=>{const L=t?"B":"A",l=L.toLowerCase();return`<div class="team" style="--tc:var(--t${l})"><label for="t${l}">Nombre del Equipo ${L}</label><input type="text" id="t${l}" placeholder="Equipo ${L}">${Array.from({length:N/2},(_,k)=>pf(2*k+t)).join("")}</div>`}).join("")}
