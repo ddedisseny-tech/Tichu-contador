@@ -9,17 +9,20 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Tichu">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&family=Oregano&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fbf3de;--card:rgba(255,252,243,.72);--line:#d3b98a;--acc:#a63d2c;--onacc:#fff;--warn:#b3261e;--gold:#e3a72f;--ta:#b8432f;--tb:#2e7d8c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#fbf3de;--card:rgba(255,252,243,.84);--line:#d3b98a;--acc:#a63d2c;--onacc:#fff;--warn:#b3261e;--gold:#e3a72f;--ta:#b8432f;--tb:#2e7d8c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
 html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{font-synthesis:none}
+.team{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--tc);border-radius:14px;padding:2px 12px 12px;margin:14px 0;box-shadow:0 3px 10px rgba(80,30,0,.15);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.team label:first-child{font-weight:800;color:var(--tc)}
 .p,.hist,.rank{-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 body::before{content:"";position:fixed;inset:0;z-index:-1;background:url(fondo.webp) center top/cover no-repeat}
-body{margin:0;min-height:100vh;background:none;color:#000;font:400 16px/1.4 "Zen Maru Gothic","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif}
-h1,h2{font-family:"Reggae One","Zen Maru Gothic","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
-.num{font-family:"Zen Maru Gothic","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;font-weight:700}
+body{margin:0;min-height:100vh;background:none;color:#000;font:400 18px/1.4 "Oregano","Trebuchet MS",system-ui,sans-serif}
+h1{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
+h2{font-weight:400}
+.num{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
 main{max-width:1000px;margin:0 auto;padding:16px}
 button{font:inherit;color:#000;cursor:pointer;border:1px solid var(--line);background:rgba(255,252,243,.92);border-radius:10px;padding:10px 12px;min-height:44px}
 button:disabled{opacity:.5;cursor:not-allowed}
@@ -28,27 +31,27 @@ button.pri{background:var(--acc);color:var(--onacc);border-color:var(--acc);font
 h1{font-size:clamp(46px,13vw,66px);letter-spacing:2px;line-height:1;margin:0;text-align:center;color:#f2bd45;-webkit-text-stroke:3px #7d3a24;paint-order:stroke fill;text-shadow:0 4px 0 rgba(125,58,36,.35)}
 .ic{font-size:1.45em;line-height:1;vertical-align:-.14em;margin-right:.16em}
 header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;margin-bottom:12px}
-.sub{display:inline-block;font-size:20px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:5px 16px;box-shadow:0 2px 6px rgba(80,30,0,.25)}
+.sub{display:inline-block;font-size:22px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:5px 16px;box-shadow:0 2px 6px rgba(80,30,0,.25)}
 .tools{display:flex;gap:8px;justify-content:space-between;width:100%}
 .tools button{background:#fff;border:2px solid #b08a4a;font-weight:700;box-shadow:0 2px 6px rgba(80,30,0,.2);padding:8px 10px;white-space:nowrap;min-width:0}
 .tools button .ic{font-size:1.2em}
-.paper{background-color:rgba(244,236,217,.62);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='g'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.75'%20numOctaves='3'%20seed='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200.55%20-0.2'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");border:2px solid var(--acc);border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 4px 14px rgba(80,30,0,.18)}
-.st{display:block;font-size:16px;font-weight:800;margin:10px 0 6px}
+.paper{background-color:rgba(244,236,217,.74);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='g'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.75'%20numOctaves='3'%20seed='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200.55%20-0.2'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");border:2px solid var(--acc);border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 4px 14px rgba(80,30,0,.18)}
+.st{display:block;font-size:18px;font-weight:800;margin:10px 0 6px}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .p{box-shadow:0 3px 10px rgba(80,30,0,.15);background:var(--card);border:1px solid var(--line);border-top:8px solid var(--pc);border-radius:14px;padding:12px}
 .p.lead{box-shadow:0 0 0 3px var(--gold)}
-.name{font-weight:700;font-size:19px;background:transparent;border:0;border-bottom:1px dashed var(--line);color:#000;width:100%;padding:2px 0;font-family:inherit}
-.mem{display:block;font-size:14px;margin-top:4px}
-.tag{display:inline-block;font-size:13px;font-weight:800;background:var(--gold);border-radius:99px;padding:2px 10px;margin-top:4px}
+.name{font-weight:400;font-size:22px;background:transparent;border:0;border-bottom:1px dashed var(--line);color:#000;width:100%;padding:2px 0;font-family:inherit}
+.mem{display:block;font-size:17px;margin-top:4px}
+.tag{display:inline-block;font-size:16px;font-weight:800;background:var(--gold);border-radius:99px;padding:2px 10px;margin-top:4px}
 .num{font-size:58px;line-height:1.05;margin:4px 0 2px}
-.num small{font-family:"Zen Maru Gothic","Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;font-size:20px;font-weight:700}
+.num small{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-size:22px;font-weight:400}
 .num.over{color:var(--warn)}
 .bar{height:12px;background:#e6d6b4;border-radius:99px;overflow:hidden;margin:6px 0 0}
 .bar i{display:block;height:100%;border-radius:99px}
 .hist{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
 .hist div{padding:8px 0;border-bottom:1px solid var(--line)}
 .hist div:last-child{border:0}
-.hist small{display:block;font-size:13px}
+.hist small{display:block;font-size:16px}
 .pos{color:#1b6b2a;font-weight:800}.neg{color:var(--warn);font-weight:800}
 section{margin-top:20px}
 h2{font-size:22px;margin:0 0 8px;color:var(--acc)}
@@ -62,8 +65,8 @@ h2{font-size:22px;margin:0 0 8px;color:var(--acc)}
 .seg button.on,.firsts button.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800}
 input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff8e6;color:#000;width:100%}
 .tagline{font-size:23px;font-weight:800;color:var(--acc);margin:8px 0 4px;text-align:center;line-height:1.2}
-.hint{font-size:14px}
-.legal{max-width:1000px;margin:8px auto 0;padding:14px 16px 28px;border-top:1px solid var(--line);font-size:12px;line-height:1.45;text-align:center}
+.hint{font-size:17px}
+.legal{max-width:1000px;margin:8px auto 0;padding:14px 16px 28px;border-top:1px solid var(--line);font-size:15px;line-height:1.45;text-align:center}
 .legal p{margin:0 0 4px}
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:9}
 #modal.show{display:flex}
@@ -132,21 +135,21 @@ function calc(f){
 /* ---------- pantallas ---------- */
 function setup(){
   const m=window._m||"4",N={"4":4,"3":3,"6":6}[m],tg=window._t||1000,nr=window._r||6;
+  const pf=i=>`<label>Jugador ${i+1}</label><input type="text" data-n="${i}" placeholder="Jugador ${i+1}">`;
   const modes=[["4","👥 4 jugadores"],["3","🀄 Trichu · 3"],["6","🏮 Tianjin · 6"]];
   $("#app").innerHTML=`<div class="setup">${BRAND}<p class="hint tagline">¿Quién se queda sin cartas primero?</p>
   <label>Modo de juego</label><div class="seg">${modes.map(([k,l])=>`<button data-m="${k}" class="${k==m?"on":""}">${l}</button>`).join("")}</div>
   <p class="hint">${m==="4"?"Dos equipos de 2. Los jugadores se sientan alternados: J1 y J3 contra J2 y J4.":m==="3"?"Trichu (Tichu de Nankín): cada jugador puntúa por su cuenta. El que reparte juega con un compañero virtual, «la Mesa».":"Tichu de Tianjin: dos equipos de 3, sentados alternados: J1, J3 y J5 contra J2, J4 y J6. La triple victoria vale 300."}</p>
   ${m==="3"?`<label>Número de rondas</label><div class="seg">${[3,6,9,12].map(k=>`<button data-r="${k}" class="${k==nr?"on":""}">${k}</button>`).join("")}</div><p class="hint">Tiene que ser múltiplo de 3 para que todos jueguen igual de veces con la Mesa.</p>`
-  :`<label>Puntos para ganar</label><div class="seg">${[500,750,1000].map(k=>`<button data-t="${k}" class="${k==tg?"on":""}">${k}</button>`).join("")}</div>
-  <label>Nombre del Equipo A</label><input type="text" id="ta" placeholder="Equipo A"><label>Nombre del Equipo B</label><input type="text" id="tb" placeholder="Equipo B">`}
-  ${Array.from({length:N},(_,i)=>`<label>Jugador ${i+1}${m==="3"?"":" (Equipo "+(i%2?"B":"A")+")"}</label><input type="text" data-n placeholder="Jugador ${i+1}">`).join("")}
+  :`<label>Puntos para ganar</label><div class="seg">${[500,750,1000].map(k=>`<button data-t="${k}" class="${k==tg?"on":""}">${k}</button>`).join("")}</div>`}
+  ${m==="3"?Array.from({length:N},(_,i)=>pf(i)).join(""):[0,1].map(t=>{const L=t?"B":"A",l=L.toLowerCase();return`<div class="team" style="--tc:var(--t${l})"><label for="t${l}">Nombre del Equipo ${L}</label><input type="text" id="t${l}" placeholder="Equipo ${L}">${Array.from({length:N/2},(_,k)=>pf(2*k+t)).join("")}</div>`}).join("")}
   <p><button class="pri" id="go" style="width:100%">✅ Empezar partida</button></p></div>`;
   big($("#app"));
   document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{window._m=b.dataset.m;setup()});
   document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{window._t=+b.dataset.t;setup()});
   document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{window._r=+b.dataset.r;setup()});
   $("#go").onclick=()=>{
-    const names=[...document.querySelectorAll("[data-n]")].map((e,i)=>e.value.trim()||"Jugador "+(i+1));
+    const names=[...document.querySelectorAll("[data-n]")].sort((a,b)=>a.dataset.n-b.dataset.n).map((e,i)=>e.value.trim()||"Jugador "+(i+1));
     const tn=m==="3"?["",""]:[($("#ta").value.trim()||"Equipo A"),($("#tb").value.trim()||"Equipo B")];
     S={mode:m,names,tn,target:tg,nr,hist:[],over:false,shown:false};H=[];save();render()}}
 function openForm(){
