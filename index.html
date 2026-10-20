@@ -9,21 +9,25 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Tichu">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&family=Oregano&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fbf3de;--card:rgba(255,252,243,.84);--line:#d3b98a;--acc:#a63d2c;--onacc:#fff;--warn:#b3261e;--gold:#e3a72f;--ta:#b8432f;--tb:#2e7d8c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
 html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{font-synthesis:none}
+#splash{position:fixed;inset:0;z-index:1000;background:#f4d3bc url(splash.webp) center/cover no-repeat;transition:opacity .7s ease}
+#splash.out{opacity:0;pointer-events:none}
+@media (min-aspect-ratio:1/1){#splash{background-size:auto 100%}}
+@media (prefers-reduced-motion:reduce){#splash{transition:none}}
 .logo{margin:0;text-align:center;line-height:0}.logo img{display:block;margin:0 auto;width:min(80vw,340px);height:auto;filter:drop-shadow(0 2px 3px rgba(255,255,255,.7))}
 header .logo img{width:min(58vw,230px)}
 .team{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--tc);border-radius:14px;padding:2px 12px 12px;margin:14px 0;box-shadow:0 3px 10px rgba(80,30,0,.15);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .team label:first-child{font-weight:800;color:var(--tc)}
 .p,.hist,.rank{-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 body::before{content:"";position:fixed;inset:0;z-index:-1;background:url(fondo.webp) center top/cover no-repeat}
-body{margin:0;min-height:100vh;background:none;color:#000;font:400 18px/1.4 "Oregano","Trebuchet MS",system-ui,sans-serif}
+body{margin:0;min-height:100vh;background:none;color:#000;font:600 17px/1.4 "Nunito","Trebuchet MS",system-ui,sans-serif}
 h1{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
-h2{font-weight:400}
+h2{font-weight:800}
 .num{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
 main{max-width:1000px;margin:0 auto;padding:16px}
 button{font:inherit;color:#000;cursor:pointer;border:1px solid var(--line);background:rgba(255,252,243,.92);border-radius:10px;padding:10px 12px;min-height:44px}
@@ -33,18 +37,18 @@ button.pri{background:var(--acc);color:var(--onacc);border-color:var(--acc);font
 h1{font-size:clamp(46px,13vw,66px);letter-spacing:2px;line-height:1;margin:0;text-align:center;color:#f2bd45;-webkit-text-stroke:3px #7d3a24;paint-order:stroke fill;text-shadow:0 4px 0 rgba(125,58,36,.35)}
 .ic{font-size:1.45em;line-height:1;vertical-align:-.14em;margin-right:.16em}
 header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;margin-bottom:12px}
-.sub{display:inline-block;font-size:22px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:5px 16px;box-shadow:0 2px 6px rgba(80,30,0,.25)}
+.sub{display:inline-block;font-size:20px;font-weight:800;background:var(--acc);color:#fff;border-radius:99px;padding:5px 16px;box-shadow:0 2px 6px rgba(80,30,0,.25)}
 .tools{display:flex;gap:8px;justify-content:space-between;width:100%}
 .tools button{background:#fff;border:2px solid #b08a4a;font-weight:700;box-shadow:0 2px 6px rgba(80,30,0,.2);padding:8px 10px;white-space:nowrap;min-width:0}
 .tools button .ic{font-size:1.2em}
 .paper{background-color:rgba(244,236,217,.74);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='g'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.75'%20numOctaves='3'%20seed='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200%200.35%20%200%200%200%200.55%20-0.2'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");border:2px solid var(--acc);border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 4px 14px rgba(80,30,0,.18)}
-.st{display:block;font-size:18px;font-weight:800;margin:10px 0 6px}
+.st{display:block;font-size:17px;font-weight:800;margin:10px 0 6px}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .p{box-shadow:0 3px 10px rgba(80,30,0,.15);background:var(--card);border:1px solid var(--line);border-top:8px solid var(--pc);border-radius:14px;padding:12px}
 .p.lead{box-shadow:0 0 0 3px var(--gold)}
-.name{font-weight:400;font-size:22px;background:transparent;border:0;border-bottom:1px dashed var(--line);color:#000;width:100%;padding:2px 0;font-family:inherit}
-.mem{display:block;font-size:17px;margin-top:4px}
-.tag{display:inline-block;font-size:16px;font-weight:800;background:var(--gold);border-radius:99px;padding:2px 10px;margin-top:4px}
+.name{font-weight:800;font-size:20px;background:transparent;border:0;border-bottom:1px dashed var(--line);color:#000;width:100%;padding:2px 0;font-family:inherit}
+.mem{display:block;font-size:16px;margin-top:4px}
+.tag{display:inline-block;font-size:15px;font-weight:800;background:var(--gold);border-radius:99px;padding:2px 10px;margin-top:4px}
 .num{font-size:58px;line-height:1.05;margin:4px 0 2px}
 .num small{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-size:22px;font-weight:400}
 .num.over{color:var(--warn)}
@@ -53,7 +57,7 @@ header{display:flex;flex-direction:column;align-items:center;text-align:center;g
 .hist{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
 .hist div{padding:8px 0;border-bottom:1px solid var(--line)}
 .hist div:last-child{border:0}
-.hist small{display:block;font-size:16px}
+.hist small{display:block;font-size:15px}
 .pos{color:#1b6b2a;font-weight:800}.neg{color:var(--warn);font-weight:800}
 section{margin-top:20px}
 h2{font-size:22px;margin:0 0 8px;color:var(--acc)}
@@ -67,8 +71,8 @@ h2{font-size:22px;margin:0 0 8px;color:var(--acc)}
 .seg button.on,.firsts button.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:800}
 input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff8e6;color:#000;width:100%}
 .tagline{font-size:23px;font-weight:800;color:var(--acc);margin:8px 0 4px;text-align:center;line-height:1.2}
-.hint{font-size:17px}
-.legal{max-width:1000px;margin:8px auto 0;padding:14px 16px 28px;border-top:1px solid var(--line);font-size:15px;line-height:1.45;text-align:center}
+.hint{font-size:16px}
+.legal{max-width:1000px;margin:8px auto 0;padding:14px 16px 28px;border-top:1px solid var(--line);font-size:14px;line-height:1.45;text-align:center}
 .legal p{margin:0 0 4px}
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:9}
 #modal.show{display:flex}
@@ -97,7 +101,7 @@ input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid v
 .err{color:var(--warn);font-weight:700;min-height:1.3em;margin:4px 0;text-align:center}
 @media(prefers-reduced-motion:reduce){.fcard{animation:none}}
 </style></head>
-<body><main id="app"></main>
+<body><div id="splash" role="img" aria-label="Bienvenido a Tichu Contador"></div><main id="app"></main>
 <div id="modal"><div id="box" role="dialog" aria-modal="true"><h2 id="mt"></h2><div id="opts"></div><button id="mc" style="width:100%">Cancelar</button></div></div>
 <footer class="legal"><p><b>Tichu</b> es un juego de sus respectivos autores, editado en español por <b>Devir</b>. Este contador gratuito ha sido diseñado y creado por <b>PenTech</b> como complemento para facilitar la contabilidad de la partida.</p><p>El nombre del juego y sus reglas pertenecen a sus titulares.</p></footer>
 <script>
@@ -252,5 +256,9 @@ function render(){
     if(m==="3")S.names[i]=v||"Jugador "+(i+1);else S.tn[i]=v||"Equipo "+(i?"B":"A");save();render()});
   if(S.over&&!S.shown){S.shown=true;save();setTimeout(showFin,200)}}
 render();
+let splashOn=false;
+function hideSplash(){const e=document.getElementById("splash");if(!e||e.classList.contains("out"))return;e.classList.add("out");setTimeout(()=>e.remove(),800)}
+function startSplash(){if(splashOn)return;splashOn=true;setTimeout(hideSplash,5000)}
+(function(){const e=document.getElementById("splash");if(!e)return;e.addEventListener("click",hideSplash);const i=new Image();i.onload=startSplash;i.onerror=hideSplash;i.src="splash.webp";setTimeout(startSplash,3000)})();
 if("serviceWorker" in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script></body></html>
