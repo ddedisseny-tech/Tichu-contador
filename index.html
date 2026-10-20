@@ -15,6 +15,8 @@
 *{box-sizing:border-box}
 html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{font-synthesis:none}
+.logo{margin:0;text-align:center;line-height:0}.logo img{display:block;margin:0 auto;width:min(80vw,340px);height:auto;filter:drop-shadow(0 2px 3px rgba(255,255,255,.7))}
+header .logo img{width:min(58vw,230px)}
 .team{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--tc);border-radius:14px;padding:2px 12px 12px;margin:14px 0;box-shadow:0 3px 10px rgba(80,30,0,.15);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .team label:first-child{font-weight:800;color:var(--tc)}
 .p,.hist,.rank{-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
@@ -100,7 +102,7 @@ input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid v
 <footer class="legal"><p><b>Tichu</b> es un juego de sus respectivos autores, editado en español por <b>Devir</b>. Este contador gratuito ha sido diseñado y creado por <b>PenTech</b> como complemento para facilitar la contabilidad de la partida.</p><p>El nombre del juego y sus reglas pertenecen a sus titulares.</p></footer>
 <script>
 const KEY="tichu-v1",COLS=["#b8432f","#2e7d8c"],PC=["#b8432f","#2e7d8c","#6f9a4a","#e3a72f"];
-const BRAND='<h1>Tichu</h1>';
+const BRAND='<h1 class="logo"><img src="logo.webp" width="469" height="219" alt="Tichu · Contador"></h1>';
 let S=null,H=[],F=null;
 try{const r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);const q=localStorage.getItem(KEY+"-h");if(q){const a=JSON.parse(q);if(Array.isArray(a))H=a}}}catch(e){}
 const $=s=>document.querySelector(s);
