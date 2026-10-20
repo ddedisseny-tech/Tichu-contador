@@ -15,12 +15,15 @@
 *{box-sizing:border-box}
 html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{font-synthesis:none}
+#topbar{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:center;padding:env(safe-area-inset-top,0px) 0 6px;pointer-events:none;transition:background .25s,box-shadow .25s}
+#topbar img{display:block;width:min(72vw,300px);height:auto;transition:width .25s ease;filter:drop-shadow(0 2px 3px rgba(255,255,255,.7))}
+#topbar.mini{background:rgba(251,243,222,.86);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(80,30,0,.18)}
+#topbar.mini img{width:min(36vw,150px)}
+@media (prefers-reduced-motion:reduce){#topbar,#topbar img{transition:none}}
 #splash{position:fixed;inset:0;z-index:1000;background:#f4d3bc url(splash.webp) center/cover no-repeat;transition:opacity .7s ease}
 #splash.out{opacity:0;pointer-events:none}
 @media (min-aspect-ratio:1/1){#splash{background-size:auto 100%}}
 @media (prefers-reduced-motion:reduce){#splash{transition:none}}
-.logo{margin:0;text-align:center;line-height:0}.logo img{display:block;margin:0 auto;width:min(80vw,340px);height:auto;filter:drop-shadow(0 2px 3px rgba(255,255,255,.7))}
-header .logo img{width:min(58vw,230px)}
 .team{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--tc);border-radius:14px;padding:2px 12px 12px;margin:14px 0;box-shadow:0 3px 10px rgba(80,30,0,.15);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .team label:first-child{font-weight:800;color:var(--tc)}
 .p,.hist,.rank{-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
@@ -29,7 +32,7 @@ body{margin:0;min-height:100vh;background:none;color:#000;font:600 17px/1.4 "Nun
 h1{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
 h2{font-weight:800}
 .num{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400}
-main{max-width:1000px;margin:0 auto;padding:16px}
+main{max-width:1000px;margin:0 auto;padding:16px;padding-top:calc(min(72vw,300px)*.467 + 20px)}
 button{font:inherit;color:#000;cursor:pointer;border:1px solid var(--line);background:rgba(255,252,243,.92);border-radius:10px;padding:10px 12px;min-height:44px}
 button:disabled{opacity:.5;cursor:not-allowed}
 button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
@@ -101,12 +104,12 @@ input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid v
 .err{color:var(--warn);font-weight:700;min-height:1.3em;margin:4px 0;text-align:center}
 @media(prefers-reduced-motion:reduce){.fcard{animation:none}}
 </style></head>
-<body><div id="splash" role="img" aria-label="Bienvenido a Tichu Contador"></div><main id="app"></main>
+<body><div id="topbar"><img src="logo.webp" width="469" height="219" alt="Tichu · Contador"></div><div id="splash" role="img" aria-label="Bienvenido a Tichu Contador"></div><main id="app"></main>
 <div id="modal"><div id="box" role="dialog" aria-modal="true"><h2 id="mt"></h2><div id="opts"></div><button id="mc" style="width:100%">Cancelar</button></div></div>
 <footer class="legal"><p><b>Tichu</b> es un juego de sus respectivos autores, editado en español por <b>Devir</b>. Este contador gratuito ha sido diseñado y creado por <b>PenTech</b> como complemento para facilitar la contabilidad de la partida.</p><p>El nombre del juego y sus reglas pertenecen a sus titulares.</p></footer>
 <script>
 const KEY="tichu-v1",COLS=["#b8432f","#2e7d8c"],PC=["#b8432f","#2e7d8c","#6f9a4a","#e3a72f"];
-const BRAND='<h1 class="logo"><img src="logo.webp" width="469" height="219" alt="Tichu · Contador"></h1>';
+const BRAND='';
 let S=null,H=[],F=null;
 try{const r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);const q=localStorage.getItem(KEY+"-h");if(q){const a=JSON.parse(q);if(Array.isArray(a))H=a}}}catch(e){}
 const $=s=>document.querySelector(s);
@@ -256,6 +259,7 @@ function render(){
     if(m==="3")S.names[i]=v||"Jugador "+(i+1);else S.tn[i]=v||"Equipo "+(i?"B":"A");save();render()});
   if(S.over&&!S.shown){S.shown=true;save();setTimeout(showFin,200)}}
 render();
+const tb=document.getElementById("topbar");function onScroll(){tb.classList.toggle("mini",(window.scrollY||document.documentElement.scrollTop)>30)}addEventListener("scroll",onScroll,{passive:true});onScroll();
 let splashOn=false;
 function hideSplash(){const e=document.getElementById("splash");if(!e||e.classList.contains("out"))return;e.classList.add("out");setTimeout(()=>e.remove(),800)}
 function startSplash(){if(splashOn)return;splashOn=true;setTimeout(hideSplash,5000)}
