@@ -2,7 +2,8 @@
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tichu · Contador</title>
-<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#a63d2c">
@@ -20,8 +21,6 @@ html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-t
 .mopt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin:14px 0;box-shadow:0 3px 10px rgba(80,30,0,.15);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .mopt .hint{margin:10px 2px 0;text-align:center}
 .mbtn{width:100%;font-size:20px;padding:16px 12px}
-button.pri.mbtn{background:linear-gradient(180deg,#fcd9e2,#f5b9ca);color:#6e2236;border:2px solid #e590a9;box-shadow:0 2px 0 #d97f9a}
-button.pri.mbtn:active{transform:translateY(2px);box-shadow:none}
 .modehead{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:4px}.modehead h2{margin:0;align-self:center}
 #topbar{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:center;padding:env(safe-area-inset-top,0px) 0 6px;pointer-events:none;transition:background .25s,box-shadow .25s}
 #topbar img{display:block;width:min(72vw,300px);height:auto;transition:width .25s ease;filter:drop-shadow(0 2px 3px rgba(255,255,255,.7))}
@@ -110,6 +109,26 @@ input[type=text],input[type=number]{font:inherit;padding:10px;border:1px solid v
 .prev{background:#fff8e6;border:1px dashed #b08a4a;border-radius:12px;padding:8px 10px;margin:12px 0 6px;font-weight:700;text-align:center}
 .err{color:var(--warn);font-weight:700;min-height:1.3em;margin:4px 0;text-align:center}
 @media(prefers-reduced-motion:reduce){.fcard{animation:none}}
+
+/* ===== Estilo oriental: marcos de papel, botones lacados ===== */
+:root{--ink:#4a3328}
+.paper,.p,.team,.mopt,.hist,.rank{position:relative;border-radius:4px}
+.paper,.mopt,.hist,.rank{border:1.5px solid var(--ink)}
+.p{border-color:var(--ink);border-width:8px 1.5px 1.5px;border-top-color:var(--pc)}
+.team{border-color:var(--ink);border-width:8px 1.5px 1.5px;border-top-color:var(--tc)}
+.hist,.rank{padding:10px 16px}
+.paper::before,.p::before,.team::before,.mopt::before,.hist::before,.rank::before{content:"";position:absolute;inset:4px;border:1px solid rgba(74,51,40,.3);border-radius:2px;pointer-events:none}
+.paper::after,.p::after,.team::after,.mopt::after,.hist::after,.rank::after{content:"";position:absolute;inset:4px;pointer-events:none;background:linear-gradient(var(--acc),var(--acc)) 0 0/12px 2px no-repeat,linear-gradient(var(--acc),var(--acc)) 0 0/2px 12px no-repeat,linear-gradient(var(--acc),var(--acc)) 100% 0/12px 2px no-repeat,linear-gradient(var(--acc),var(--acc)) 100% 0/2px 12px no-repeat,linear-gradient(var(--acc),var(--acc)) 0 100%/12px 2px no-repeat,linear-gradient(var(--acc),var(--acc)) 0 100%/2px 12px no-repeat,linear-gradient(var(--acc),var(--acc)) 100% 100%/12px 2px no-repeat,linear-gradient(var(--acc),var(--acc)) 100% 100%/2px 12px no-repeat}
+button,.tools button,#opts button,.fcard .row button,.crow button.c1{border:1.5px solid #7a5a45;border-radius:5px;box-shadow:inset 0 0 0 2px rgba(255,250,240,.95),inset 0 0 0 3px rgba(122,90,69,.4),0 2px 0 rgba(90,59,46,.25)}
+button.pri,.seg button.on,.firsts button.on,.fcard .row button.pri,.crow button.c2{background:#a8382a;color:#fff4dc;border:1.5px solid #5a1d14;box-shadow:inset 0 0 0 2px #a8382a,inset 0 0 0 3px rgba(242,201,112,.85),0 2px 0 #5a1d14}
+button.pri.mbtn{width:100%;font-size:20px;padding:16px 12px;letter-spacing:.5px}
+button:active{transform:translateY(1px)}
+input[type=text],input[type=number]{border:1.5px solid #9c7b5f;border-radius:4px;background:#fffaf0}
+.sub{border-radius:4px;background:#a8382a;box-shadow:inset 0 0 0 2px #a8382a,inset 0 0 0 3px rgba(242,201,112,.85),0 2px 6px rgba(80,30,0,.25);padding:6px 18px}
+.tag{border-radius:3px}
+.fcard{border:6px double var(--acc);border-radius:6px}
+#box{border-radius:10px 10px 0 0;border-top:5px double var(--acc)}
+.mtitle::after{content:"";display:block;height:1px;margin:8px auto 0;width:min(70%,220px);background:linear-gradient(90deg,transparent,var(--acc) 30%,var(--acc) 70%,transparent)}
 </style></head>
 <body><div id="topbar"><img src="logo.webp" width="469" height="219" alt="Tichu · Contador"></div><div id="splash" role="img" aria-label="Bienvenido a Tichu Contador"></div><main id="app"></main>
 <div id="modal"><div id="box" role="dialog" aria-modal="true"><h2 id="mt"></h2><div id="opts"></div><button id="mc" style="width:100%">Cancelar</button></div></div>
