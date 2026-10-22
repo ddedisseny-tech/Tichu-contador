@@ -16,6 +16,8 @@
 *{box-sizing:border-box}
 html{min-height:100%;background:#f6e6bf;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{font-synthesis:none}
+.or{text-align:center;margin:12px 0;font-weight:800;color:var(--ink)}
+.err{color:var(--warn);font-weight:700;min-height:1.2em;margin:6px 0}
 #go{font-size:21px;padding:14px 12px}
 .pr{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400;font-size:1.25em;line-height:1}
 .mtitle{font-family:"Protest Revolution","Arial Rounded MT Bold",system-ui,sans-serif;font-weight:400;font-size:clamp(32px,9vw,38px);line-height:1.1;color:var(--acc);text-align:center;margin:6px 0 4px}
@@ -136,13 +138,35 @@ input[type=text],input[type=number]{border:1.5px solid #9c7b5f;border-radius:4px
 <div id="modal"><div id="box" role="dialog" aria-modal="true"><h2 id="mt"></h2><div id="opts"></div><button id="mc" style="width:100%">Cancelar</button></div></div>
 <footer class="legal"><p><b>Tichu</b> es un juego de sus respectivos autores, editado en español por <b>Devir</b>. Este contador gratuito ha sido diseñado y creado por <b>PenTech</b> como complemento para facilitar la contabilidad de la partida.</p><p>El nombre del juego y sus reglas pertenecen a sus titulares.</p></footer>
 <script>
-const KEY="tichu-v1",COLS=["#b8432f","#2e7d8c"],PC=["#b8432f","#2e7d8c","#6f9a4a","#e3a72f"];
+const KEY="tichu-pro-v1",COLS=["#b8432f","#2e7d8c"],PC=["#b8432f","#2e7d8c","#6f9a4a","#e3a72f"];
 const BRAND='';
 let S=null,H=[],F=null;
 try{const r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);const q=localStorage.getItem(KEY+"-h");if(q){const a=JSON.parse(q);if(Array.isArray(a))H=a}}}catch(e){}
 const $=s=>document.querySelector(s);
 const esc=t=>String(t).replace(/"/g,"&quot;").replace(/</g,"&lt;");
 const sg=n=>(n>0?"+":"")+n;
+const KEYH=6186917670965467,LK="tichu-pro-lic",TK="tichu-pro-trial";
+let LICOK=false,TR=null;
+const h53=(str,seed=0)=>{let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0)};
+function lic(){try{if(localStorage.getItem(LK)===String(KEYH))return true}catch(e){}return LICOK}
+function setLic(){LICOK=true;try{localStorage.setItem(LK,String(KEYH))}catch(e){}}
+function getTrial(){try{return localStorage.getItem(TK)||TR}catch(e){return TR}}
+function setTrial(v){TR=v;try{localStorage.setItem(TK,v)}catch(e){}}
+function gate(){
+  const used=getTrial()==="used",playing=!!S&&getTrial()==="active";
+  $("#app").innerHTML=`<div class="setup gate"><h2 class="mtitle">Acceso a la app</h2>
+  <div class="mopt"><label for="lk">Clave de licencia</label><input id="lk" type="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="Introduce tu clave">
+  <p id="lerr" class="err" role="alert"></p><button class="pri" id="lgo" style="width:100%">Entrar</button></div>
+  <div class="or">o</div>
+  ${playing?'<button id="lback" style="width:100%">Volver a la partida</button>':'<button id="ltry" style="width:100%">Pruébame (una partida)</button>'}
+  <p class="hint">${playing?"Con la clave podrás jugar todas las partidas que quieras.":used?"Ya has usado tu prueba gratuita. Introduce la clave para seguir jugando.":"Prueba el contador en una partida. Con la clave entras siempre."}</p></div>`;
+  big($("#app"));
+  const go=()=>{const v=$("#lk").value.trim().toUpperCase();
+    if(h53(v)===KEYH){setLic();window._gate=false;render()}
+    else{$("#lerr").textContent="Clave incorrecta. Revísala e inténtalo de nuevo.";$("#lk").select()}};
+  $("#lgo").onclick=go;$("#lk").onkeydown=e=>{if(e.key==="Enter")go()};
+  if($("#ltry"))$("#ltry").onclick=()=>{if(used){$("#lerr").textContent="Ya has usado tu prueba gratuita. Introduce la clave para seguir.";return}setTrial("active");render()};
+  if($("#lback"))$("#lback").onclick=()=>{window._gate=false;render()}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));localStorage.setItem(KEY+"-h",JSON.stringify(H))}catch(e){}}
 function mut(fn){H.push(JSON.stringify(S));if(H.length>80)H.shift();fn();save();render()}
 function undo(){if(!H.length)return;S=JSON.parse(H.pop());save();render()}
@@ -232,7 +256,7 @@ function apply(){
   mut(()=>{S.hist.push({d,tags});const t=totals();
     if(m==="3")S.over=S.hist.length>=S.nr;
     else{const mx=Math.max(...t);if(mx>=S.target&&t[0]!==t[1])S.over=true}})}
-async function reset(){const r=await pick("¿Empezar una partida nueva? Se borra la actual.",[{l:"Sí, nueva partida",v:1}]);if(r){S=null;H=[];window._m=null;try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-h")}catch(e){}render()}}
+async function reset(){const r=await pick("¿Empezar una partida nueva? Se borra la actual"+(lic()?".":" y terminará tu prueba gratuita."),[{l:"Sí, nueva partida",v:1}]);if(r){if(!lic())setTrial("used");S=null;H=[];window._m=null;try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-h")}catch(e){}render()}}
 function confetti(){
   if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
   const c=document.createElement("canvas");c.style.cssText="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40";
@@ -265,9 +289,10 @@ function showFin(){
   <div class="row"><button id="fv">👀 Ver partida</button><button class="pri" id="fn">Nueva partida</button></div></div>`;
   document.body.appendChild(d);big(d);
   d.querySelector("#fv").onclick=()=>d.remove();
-  d.querySelector("#fn").onclick=()=>{d.remove();S=null;H=[];window._m=null;try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-h")}catch(e){}render()};
+  d.querySelector("#fn").onclick=()=>{d.remove();if(!lic())setTrial("used");S=null;H=[];window._m=null;try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-h")}catch(e){}render()};
   confetti()}
 function render(){
+  if(!lic()&&(window._gate||getTrial()!=="active"))return gate();
   if(!S)return window._m?setup():menu();
   const m=S.mode,e=ents(),t=totals(),mx=Math.max(...t),n=S.hist.length;
   const sub=m==="3"?`Mano ${Math.min(n+1,S.nr)} de ${S.nr}`:`Mano nº ${n+1}`;
@@ -281,14 +306,14 @@ function render(){
   const hist=[...S.hist].map((h,k)=>({h,k})).reverse().map(({h,k})=>`<div><b>Mano ${k+1}:</b> ${e.map((nm,i)=>esc(nm)+" <span class='"+(h.d[i]<0?"neg":"pos")+"'>"+sg(h.d[i])+"</span>").join(" · ")}${h.tags.length?`<small>${h.tags.map(esc).join(" · ")}</small>`:""}</div>`).join("");
   const rank=m==="3"?e.map((nm,i)=>({nm,i,v:t[i]})).sort((a,b)=>b.v-a.v):null;
   $("#app").innerHTML=`<header>${BRAND}<div class="sub">${sub}</div>${m==="3"&&!S.over?`<div class="hint">Reparte <b>${esc(S.names[dealer()])}</b> · juega con la Mesa</div>`:""}
-  <div class="tools"><button id="u" ${H.length?"":"disabled"}>Deshacer</button><button id="rs">Nueva partida</button></div></header>
+  <div class="tools"><button id="u" ${H.length?"":"disabled"}>Deshacer</button><button id="rs">Nueva partida</button>${lic()?"":'<button id="kb">Clave</button>'}</div></header>
   ${S.over?`<div class="paper"><b style="font-size:20px">🏁 Fin de partida</b><button class="pri" id="vr" style="width:100%;margin-top:8px">🏆 Ver resultados</button></div>`
   :`<div class="paper"><button class="pri" id="ap" style="width:100%;font-size:19px">Apuntar mano</button>${m!=="3"&&Math.max(...t)>=S.target&&t[0]===t[1]?`<p style="margin:8px 0 0;font-weight:700;color:var(--warn)">¡Empate a ${t[0]}! Se sigue jugando hasta desempatar.</p>`:""}</div>`}
   <div class="grid">${cards}</div>
   ${rank?`<section><h2>🏆 Clasificación</h2><div class="rank">${rank.map((r,k)=>`<div><span><i class="dot" style="background:${PC[r.i]}"></i>${["🥇","🥈","🥉"][k]||(k+1)+"."} ${esc(r.nm)}</span><b>${r.v}</b></div>`).join("")}</div></section>`:""}
   <section><h2>📜 Historial</h2><div class="hist">${hist||"<div>Todavía no hay manos apuntadas.</div>"}</div></section>`;
   big($("#app"));
-  $("#u").onclick=undo;$("#rs").onclick=reset;if($("#ap"))$("#ap").onclick=openForm;if($("#vr"))$("#vr").onclick=showFin;
+  $("#u").onclick=undo;$("#rs").onclick=reset;if($("#kb"))$("#kb").onclick=()=>{window._gate=true;render()};if($("#ap"))$("#ap").onclick=openForm;if($("#vr"))$("#vr").onclick=showFin;
   document.querySelectorAll("input.name").forEach(el=>el.onchange=()=>{const i=+el.dataset.e,v=el.value.trim();
     if(m==="3")S.names[i]=v||"Jugador "+(i+1);else S.tn[i]=v||"Equipo "+(i?"B":"A");save();render()});
   if(S.over&&!S.shown){S.shown=true;save();setTimeout(showFin,200)}}
